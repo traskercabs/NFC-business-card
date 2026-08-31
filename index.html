@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>TRASKER CABS — Exclusive Outstation Transit</title>
+  <meta name="description" content="Digital Access Credential for Trasker Cabs. Dedicated outstation transit and executive mobility corridors.">
+  <meta name="theme-color" content="#0D0415">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <style>
+    /* ==========================================================================
+       DESIGN SYSTEM & EXECUTIVE TOKENS
+       ========================================================================== */
+    :root {
+      --bg-void: #0D0415;
+      --bg-surface: #12061D;
+      --bg-elevated: #1A092A;
+      --bg-card: rgba(26, 9, 42, 0.78);
+      --bg-glass: rgba(30, 10, 48, 0.55);
+
+      --gold-primary: #F9D371;
+      --gold-vibrant: #FFC857;
+      --gold-deep: #D9A441;
+      --gold-dim: rgba(249, 211, 113, 0.12);
+      --gold-border: rgba(249, 211, 113, 0.22);
+
+      --border-subtle: rgba(249, 211, 113, 0.14);
+      --border-focus: rgba(255, 200, 87, 0.5);
+      --border-glass: rgba(255, 255, 255, 0.08);
+
+      --text-main: #FFFFFF;
+      --text-body: #EFEAF4;
+      --text-muted: #A396AF;
+      --text-dim: #766B82;
+      --text-dark: #0D0415;
+
+      /* Professional Executive Sans Stack */
+      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-pill: 9999px;
+
+      --shadow-ambient: 0 8px 30px rgba(0, 0, 0, 0.45);
+      --shadow-elevated: 0 14px 38px -6px rgba(0, 0, 0, 0.75);
+      --shadow-gold: 0 4px 20px rgba(249, 211, 113, 0.28);
+
+      --transition-base: 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      --max-width: 480px;
+    }
+
+    /* ==========================================================================
+       RESET & BASE SETUP
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      background-color: var(--bg-void);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      background-color: var(--bg-void);
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(68, 18, 108, 0.32) 0%, transparent 65%),
+        radial-gradient(circle at 90% 40%, rgba(45, 12, 70, 0.25) 0%, transparent 50%),
+        radial-gradient(circle at 10% 75%, rgba(33, 9, 53, 0.35) 0%, transparent 55%),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+      background-attachment: fixed;
+      overflow-x: hidden;
+    }
+
+    /* ==========================================================================
+       CONTAINER & STRUCTURAL WRAPPER
+       ========================================================================== */
+    .app-viewport {
+      width: 100%;
+      max-width: var(--max-width);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      background-color: transparent;
+      padding-bottom: 40px;
+    }
+
+    @media (min-width: 520px) {
+      .app-viewport {
+        margin: 24px 0;
+        min-height: calc(100vh - 48px);
+        border: 1px solid rgba(249, 211, 113, 0.1);
+        border-radius: var(--radius-lg);
+        box-shadow: 0 0 70px rgba(0, 0, 0, 0.85), 0 0 35px rgba(45, 12, 70, 0.25);
+        overflow: hidden;
+      }
+    }
+
+    /* ==========================================================================
+       SECTION 01: HERO (HYUNDAI AURA)
+       ========================================================================== */
+    .hero-container {
+      position: relative;
+      width: 100%;
+      height: 350px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 24px 24px;
+      background-color: var(--bg-surface);
+    }
+
+    .hero-media-wrapper {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-media {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+      filter: brightness(0.85) contrast(1.1);
+      transform: scale(1.02);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(13, 4, 21, 0.2) 0%,
+        rgba(13, 4, 21, 0.45) 45%,
+        rgba(13, 4, 21, 0.85) 75%,
+        var(--bg-void) 100%
+      );
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      animation: fadeIn 0.6s ease-out both;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold-primary);
+    }
+
+    .hero-eyebrow::before {
+      content: "";
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold-vibrant);
+      box-shadow: 0 0 6px var(--gold-vibrant);
+    }
+
+    .hero-title {
+      font-size: 2.1rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      line-height: 1.1;
+      color: var(--text-main);
+      text-transform: uppercase;
+    }
+
+    .hero-subtitle {
+      font-size: 0.92rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      color: var(--text-muted);
+    }
+
+    /* ==========================================================================
+       SECTION 02: PRIMARY ACTIONS (DEPLOYMENT + CONTACT)
+       ========================================================================== */
+    .primary-actions-section {
+      padding: 0 24px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+      z-index: 4;
+      animation: slideUp 0.6s ease-out 0.1s both;
+    }
+
+    /* Prominent Inline Request Button */
+    .btn-deployment {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      min-height: 54px;
+      padding: 14px 20px;
+      background: linear-gradient(135deg, var(--gold-vibrant) 0%, var(--gold-primary) 50%, var(--gold-deep) 100%);
+      color: var(--text-dark);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: var(--shadow-gold), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+      cursor: pointer;
+      transition: transform var(--transition-base), filter var(--transition-base), box-shadow var(--transition-base);
+    }
+
+    .btn-deployment svg {
+      width: 21px;
+      height: 21px;
+      flex-shrink: 0;
+      fill: currentColor;
+    }
+
+    .btn-deployment:active {
+      transform: scale(0.97);
+      filter: brightness(0.92);
+      box-shadow: 0 2px 10px rgba(249, 211, 113, 0.2);
+    }
+
+    .btn-deployment:focus-visible {
+      outline: 2px solid var(--gold-vibrant);
+      outline-offset: 3px;
+    }
+
+    /* Save Contact Button */
+    .btn-save-contact {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      min-height: 48px;
+      padding: 12px 20px;
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: var(--text-body);
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-ambient);
+      cursor: pointer;
+      transition: transform var(--transition-base), border-color var(--transition-base), background var(--transition-base);
+    }
+
+    .btn-save-contact svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      fill: var(--gold-primary);
+    }
+
+    .btn-save-contact:active {
+      transform: scale(0.97);
+      border-color: var(--border-focus);
+      background: var(--bg-elevated);
+    }
+
+    .btn-save-contact:focus-visible {
+      outline: 2px solid var(--gold-vibrant);
+      outline-offset: 2px;
+    }
+
+    .actions-caption {
+      text-align: center;
+      font-size: 0.76rem;
+      color: var(--text-dim);
+      letter-spacing: 0.02em;
+    }
+
+    /* ==========================================================================
+       SECTION 03: OPERATIONAL STANDARDS / ESSENTIAL VALUE
+       ========================================================================== */
+    .value-section {
+      padding: 0 24px 28px;
+      animation: slideUp 0.6s ease-out 0.2s both;
+    }
+
+    .value-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      box-shadow: var(--shadow-ambient);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .value-card-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(249, 211, 113, 0.1);
+    }
+
+    .value-card-header svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--gold-primary);
+    }
+
+    .value-card-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold-primary);
+    }
+
+    .value-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      list-style: none;
+    }
+
+    .value-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .value-item-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold-primary);
+      margin-top: 7px;
+      flex-shrink: 0;
+    }
+
+    .value-item-content {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .value-item-heading {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .value-item-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* ==========================================================================
+       SECTION 04: ESTABLISHED CORRIDORS (ROUTE CARDS)
+       ========================================================================== */
+    .corridors-section {
+      padding: 0 24px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      animation: slideUp 0.6s ease-out 0.3s both;
+    }
+
+    .section-header {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+      letter-spacing: 0.02em;
+    }
+
+    .section-subtitle {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      letter-spacing: 0.01em;
+    }
+
+    .routes-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .route-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 68px;
+      padding: 14px 16px;
+      background: var(--bg-card);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      box-shadow: var(--shadow-ambient);
+      transition: transform var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
+    }
+
+    .route-card-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .route-badge {
+      display: inline-block;
+      font-size: 0.64rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold-primary);
+    }
+
+    .route-title {
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: var(--text-main);
+      letter-spacing: 0.01em;
+    }
+
+    .route-desc {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .route-action-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--gold-dim);
+      color: var(--gold-primary);
+      border: 1px solid rgba(249, 211, 113, 0.2);
+      flex-shrink: 0;
+      transition: background var(--transition-base), color var(--transition-base);
+    }
+
+    .route-action-icon svg {
+      width: 14px;
+      height: 14px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .route-card:active {
+      transform: scale(0.97);
+      border-color: var(--border-focus);
+      box-shadow: 0 4px 18px rgba(249, 211, 113, 0.15);
+    }
+
+    .route-card:active .route-action-icon {
+      background: var(--gold-primary);
+      color: var(--text-dark);
+    }
+
+    .route-card:focus-visible {
+      outline: 2px solid var(--gold-vibrant);
+      outline-offset: 2px;
+    }
+
+    /* ==========================================================================
+       SECTION 05: DIRECT ACCESS MATRIX
+       ========================================================================== */
+    .access-section {
+      padding: 0 24px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      animation: slideUp 0.6s ease-out 0.4s both;
+    }
+
+    .matrix-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .action-tile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 90px;
+      padding: 12px 6px;
+      background: var(--bg-card);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      box-shadow: var(--shadow-ambient);
+      gap: 5px;
+      transition: transform var(--transition-base), border-color var(--transition-base);
+    }
+
+    .action-tile-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      color: var(--gold-primary);
+    }
+
+    .action-tile-icon svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    .action-tile-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.2;
+    }
+
+    .action-tile-desc {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      line-height: 1.2;
+    }
+
+    .action-tile:active {
+      transform: scale(0.97);
+      border-color: var(--border-focus);
+    }
+
+    .action-tile:focus-visible {
+      outline: 2px solid var(--gold-vibrant);
+      outline-offset: 2px;
+    }
+
+    /* ==========================================================================
+       SECTION 06: FOOTER
+       ========================================================================== */
+    .page-footer {
+      margin-top: auto;
+      padding: 20px 24px 8px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      border-top: 1px solid rgba(249, 211, 113, 0.08);
+    }
+
+    .footer-brand {
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .footer-subtitle {
+      font-size: 0.74rem;
+      color: var(--text-dim);
+      letter-spacing: 0.04em;
+    }
+
+    /* ==========================================================================
+       KEYFRAME ANIMATIONS
+       ========================================================================== */
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(8px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideUp {
+      0% { opacity: 0; transform: translateY(14px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ==========================================================================
+       ACCESSIBILITY & PREFERS-REDUCED-MOTION
+       ========================================================================== */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+      }
+    }
+
+    @media (max-width: 340px) {
+      .hero-title {
+        font-size: 1.8rem;
+      }
+      .matrix-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+      .action-tile {
+        flex-direction: row;
+        justify-content: flex-start;
+        padding: 10px 14px;
+        min-height: 50px;
+        text-align: left;
+        gap: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="app-viewport">
+    <!-- ==========================================================================
+         SECTION 01: HERO (HYUNDAI AURA)
+         ========================================================================== -->
+    <header class="hero-container" role="banner">
+      <div class="hero-media-wrapper">
+        <img 
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Hyundai_Grand_i10_Sedan_2022_%2853703857804%29_%28cropped%29.jpg/1200px-Hyundai_Grand_i10_Sedan_2022_%2853703857804%29_%28cropped%29.jpg" 
+          alt="Hyundai Aura executive sedan for outstation transit" 
+          class="hero-media"
+          loading="eager"
+          width="1200"
+          height="800"
+        >
+      </div>
+      <div class="hero-overlay" aria-hidden="true"></div>
+
+      <div class="hero-content">
+        <span class="hero-eyebrow">Private Mobility • Established Corridors</span>
+        <h1 class="hero-title">TRASKER CABS</h1>
+        <p class="hero-subtitle">Exclusive Outstation Transit</p>
+      </div>
+    </header>
+
+    <!-- ==========================================================================
+         SECTION 02: PRIMARY ACTIONS (DEPLOYMENT + CONTACT)
+         ========================================================================== -->
+    <section class="primary-actions-section" aria-label="Booking and Contact Actions">
+      <!-- Direct Inline Vehicle Deployment Button -->
+      <a 
+        href="https://wa.me/918218602998?text=I%20require%20a%20vehicle%20deployment" 
+        class="btn-deployment" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        aria-label="Request Vehicle Deployment via WhatsApp"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24zm4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.03-1.25-.75-.67-1.26-1.5-1.41-1.75-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43-.14-.01-.31-.01-.48-.01-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.59.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.18-.47-.3z"/>
+        </svg>
+        <span>Request Vehicle Deployment</span>
+      </a>
+
+      <!-- Save Contact CTA -->
+      <a href="trasker-cabs.vcf" class="btn-save-contact" download="trasker-cabs.vcf" aria-label="Save Trasker Cabs to Contacts">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+        </svg>
+        <span>Save Contact</span>
+      </a>
+      <p class="actions-caption">Add Trasker Cabs to your contacts</p>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 03: OPERATIONAL STANDARDS / TRANSIT SPECIFICATIONS
+         ========================================================================== -->
+    <section class="value-section" aria-label="Operational Transit Standards">
+      <div class="value-card">
+        <div class="value-card-header">
+          <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+          </svg>
+          <span class="value-card-title">Transit Protocol</span>
+        </div>
+
+        <ul class="value-list">
+          <li class="value-item">
+            <div class="value-item-dot" aria-hidden="true"></div>
+            <div class="value-item-content">
+              <span class="value-item-heading">Dedicated Highway Corridors</span>
+              <span class="value-item-desc">Point-to-point transit connecting NCR, Doon Valley, and high-altitude hill sectors.</span>
+            </div>
+          </li>
+          <li class="value-item">
+            <div class="value-item-dot" aria-hidden="true"></div>
+            <div class="value-item-content">
+              <span class="value-item-heading">Chauffeur-Driven Sedan Fleet</span>
+              <span class="value-item-desc">Clean, climate-controlled vehicles optimized for long-distance comfort and luggage capacity.</span>
+            </div>
+          </li>
+          <li class="value-item">
+            <div class="value-item-dot" aria-hidden="true"></div>
+            <div class="value-item-content">
+              <span class="value-item-heading">Direct Operator Dispatch</span>
+              <span class="value-item-desc">Fast coordination without intermediary layers. Custom and unlisted itineraries upon request.</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 04: ESTABLISHED CORRIDORS
+         ========================================================================== -->
+    <section class="corridors-section" aria-label="Established Travel Corridors">
+      <div class="section-header">
+        <h2 class="section-title">Established Corridors</h2>
+        <p class="section-subtitle">Direct access to selected travel corridors.</p>
+      </div>
+
+      <div class="routes-stack">
+        <!-- ROUTE CARD 01 -->
+        <a href="https://delhi-dehradun.traskercabs.com/" class="route-card" target="_blank" rel="noopener noreferrer" aria-label="Flagship Route: Delhi to Dehradun, Direct mountain corridor">
+          <div class="route-card-info">
+            <span class="route-badge">FLAGSHIP ROUTE</span>
+            <span class="route-title">Delhi ⇄ Dehradun</span>
+            <span class="route-desc">Direct mountain corridor</span>
+          </div>
+          <div class="route-action-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M7 17L17 7M17 7H7M17 7V17"/>
+            </svg>
+          </div>
+        </a>
+
+        <!-- ROUTE CARD 02 -->
+        <a href="https://traskercabs.com/" class="route-card" target="_blank" rel="noopener noreferrer" aria-label="Entire Fleet: Main Web Portal, Explore Trasker Cabs">
+          <div class="route-card-info">
+            <span class="route-badge">ENTIRE FLEET</span>
+            <span class="route-title">Main Web Portal</span>
+            <span class="route-desc">Explore Trasker Cabs</span>
+          </div>
+          <div class="route-action-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M7 17L17 7M17 7H7M17 7V17"/>
+            </svg>
+          </div>
+        </a>
+
+        <!-- ROUTE CARD 03 -->
+        <a href="https://delhi-mussoorie.traskercabs.com/" class="route-card" target="_blank" rel="noopener noreferrer" aria-label="High-Altitude Ascent: Delhi to Mussoorie, Direct route to the hills">
+          <div class="route-card-info">
+            <span class="route-badge">HIGH-ALTITUDE ASCENT</span>
+            <span class="route-title">Delhi ⇄ Mussoorie</span>
+            <span class="route-desc">Direct route to the hills</span>
+          </div>
+          <div class="route-action-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M7 17L17 7M17 7H7M17 7V17"/>
+            </svg>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 05: DIRECT ACCESS MATRIX
+         ========================================================================== -->
+    <section class="access-section" aria-label="Direct Access Channels">
+      <div class="section-header">
+        <h2 class="section-title">Direct Access</h2>
+      </div>
+
+      <div class="matrix-grid">
+        <!-- ACTION 01 -->
+        <a href="tel:+918218602998" class="action-tile" aria-label="Secure Line: Direct phone access">
+          <div class="action-tile-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+            </svg>
+          </div>
+          <span class="action-tile-title">Secure Line</span>
+          <span class="action-tile-desc">Direct phone access</span>
+        </a>
+
+        <!-- ACTION 02 -->
+        <a href="https://share.google/VdVNtdgPNdYM1FQfS" class="action-tile" target="_blank" rel="noopener noreferrer" aria-label="Coordinates: Open in Google Maps">
+          <div class="action-tile-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+            </svg>
+          </div>
+          <span class="action-tile-title">Coordinates</span>
+          <span class="action-tile-desc">Open in Google Maps</span>
+        </a>
+
+        <!-- ACTION 03 -->
+        <a href="https://www.instagram.com/trasker_/" class="action-tile" target="_blank" rel="noopener noreferrer" aria-label="Visual Archives: Follow on Instagram">
+          <div class="action-tile-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+          </div>
+          <span class="action-tile-title">Visual Archives</span>
+          <span class="action-tile-desc">Follow on Instagram</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 06: FOOTER
+         ========================================================================== -->
+    <footer class="page-footer" role="contentinfo">
+      <span class="footer-brand">TRASKER CABS</span>
+      <span class="footer-subtitle">Exclusive Outstation Transit</span>
+    </footer>
+  </main>
+
+</body>
+</html>
